@@ -1,0 +1,19 @@
+#!/bin/bash
+
+pattern=$(./create_pattern $1 $2 $3) #get character pattern from create_pattern with params
+
+while read input
+do
+  if [[ $input == "eof" ]];
+  then
+    break;
+  elif [[ $# == 3 ]]; # -u present
+  then
+    echo $input | tr '[A-Z]' $pattern
+  continue;
+  elif [[ $# == 2 ]]; # no -u
+  then
+    echo $input | tr '[a-z]' $pattern
+  continue;
+  fi
+done

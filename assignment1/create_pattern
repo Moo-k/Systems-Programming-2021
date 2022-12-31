@@ -1,0 +1,27 @@
+#!/bin/bash
+
+uparam=false
+shiftamount=0 # initialize variables for presence of -u and amount to shift by
+
+if [[ $1 == "-u" ]]; # no case of -n -u 2
+then
+  uparam=true;
+  shiftamount=$3; # case: -u -n 2
+elif [[ $3 == "-u" ]];
+then
+  uparam=true;
+  shiftamount=$2; # case: -n 2 -u
+else
+  uparam=false;
+  shiftamount=$2; # case: -n 2
+fi
+
+lowercase=( {a..z} ); # set of lowercase characters
+uppercase=( {A..Z} ); # set of uppercase characters
+
+if [[ $uparam == false ]];
+then
+  echo "[${lowercase[$shiftamount]}-za-${lowercase[$shiftamount-1]}]"
+else
+  echo "[${uppercase[$shiftamount]}-ZA-${uppercase[$shiftamount-1]}]"
+fi

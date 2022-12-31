@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for (( i=1; i<26; i++ )); #index 1-25
+do
+  echo "Shift $i"
+  #echo $(./caesar -u -n $i < $1) #doesn't work (removes line breaks)
+  cat<$1 | tr '[A-Z]' $(./create_pattern -u -n $i) # pipe each line of input file ($1) to translate from [A-Z] character set to output character set from create_pattern
+done
